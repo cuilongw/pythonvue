@@ -1,0 +1,9 @@
+Django==5.1.7
+djangorestframework==3.15.2
+djangorestframework-simplejwt==5.5.0
+django-cors-headers==4.7.0
+PyJWT==2.9.0
+Pillow==11.1.0
+PyMySQL==1.1.1
+# MySQL 8 默认 caching_sha2_password，PyMySQL 完整认证时需要它
+cryptography==50.0.2

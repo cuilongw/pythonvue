@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Django
+db.sqlite3
+/staticfiles/
+/media/
+
+# 上传脚本的本地进度记录
+scripts/.uploaded_media.txt
+
+# IDE
+.idea/
+.vscode/
