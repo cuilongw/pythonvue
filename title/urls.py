@@ -1,14 +1,18 @@
 from django.urls import path
-from .views import NavigationBarView, CategoryItemView, CategoryListView
+from .views import (
+    CategoryItemDetailView,
+    CategoryItemView,
+    CategoryListView,
+    NavigationBarView,
+)
 
 urlpatterns = [
+    path("navigation-bar/", NavigationBarView.as_view(), name="navigation_bar"),
+    path("category-item/", CategoryItemView.as_view(), name="category_item"),
     path(
-        "navigation-bar/", NavigationBarView.as_view(), name="navigation_bar"
-    ),  # 导航栏接口
-    path(
-        "category-item/", CategoryItemView.as_view(), name="category_item"
-    ),  # 分类项接口
-    path(
-        "category-list/", CategoryListView.as_view(), name="category_list"
-    ),  # 分类列表接口
+        "category-item/<int:pk>/",
+        CategoryItemDetailView.as_view(),
+        name="category_item_detail",
+    ),
+    path("category-list/", CategoryListView.as_view(), name="category_list"),
 ]

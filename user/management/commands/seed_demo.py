@@ -34,21 +34,25 @@ class Command(BaseCommand):
 
     def seed_users(self, username, password):
         users = [
-            (username, password, "管理员演示账号"),
-            ("test", "test1234", "普通用户演示账号"),
+            (username, password, "管理员演示账号", "admin@wallpaper.local"),
+            ("test", "test1234", "普通用户演示账号", "test@wallpaper.local"),
         ]
-        for name, raw_password, remark in users:
+        for name, raw_password, remark, email in users:
             user, created = SysUser.objects.get_or_create(
                 username=name,
                 defaults={
                     "password": make_password(raw_password),
                     "status": True,
                     "remask": remark,
+                    "email": email,
                 },
             )
             if not created and not user.password.startswith(("pbkdf2_", "argon2")):
                 user.password = make_password(raw_password)
                 user.save(update_fields=["password"])
+            if not created and not user.email:
+                user.email = email
+                user.save(update_fields=["email"])
             self.stdout.write(("  + 新增用户 " if created else "  = 已存在用户 ") + name)
 
     def seed_titles(self):
